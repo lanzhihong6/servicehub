@@ -4,6 +4,12 @@ const path = require('path');
 
 const PORT = process.env.PORT || 8090;
 const CONFIG_PATH = path.join(__dirname, 'config.yaml');
+const EXAMPLE_CONFIG = path.join(__dirname, 'config.example.yaml');
+
+// 如果当前不存在 config.yaml，则从示例复制一份
+if (!fs.existsSync(CONFIG_PATH) && fs.existsSync(EXAMPLE_CONFIG)) {
+  fs.copyFileSync(EXAMPLE_CONFIG, CONFIG_PATH);
+}
 
 // MIME 类型映射
 const MIME = {
