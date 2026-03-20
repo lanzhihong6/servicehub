@@ -1,0 +1,106 @@
+# ============================================
+# ServiceHub 配置文件
+# 添加/修改/删除服务：编辑此文件后刷新页面即可
+# ============================================
+
+site:
+  title: "ServiceHub"
+  subtitle: "我的服务导航面板"
+
+groups:
+  # ── 服务器 A ──────────────────────────
+  - name: "服务器 A — 生产环境"
+    icon: "🖥️"
+    services:
+      - name: "Grafana"
+        icon: "grafana"
+        description: "系统监控与数据可视化"
+        tags: ["监控", "可视化"]
+        internalUrl: "http://100.64.0.1:3000"
+        externalUrl: "https://grafana.example.com"
+
+      - name: "Prometheus"
+        icon: "prometheus"
+        description: "系统指标采集"
+        tags: ["监控"]
+        internalUrl: "http://100.64.0.1:9090"
+        externalUrl: "https://prometheus.example.com"
+
+      - name: "Portainer"
+        icon: "portainer"
+        description: "Docker 容器管理"
+        tags: ["运维", "容器"]
+        internalUrl: "http://100.64.0.1:9000"
+
+      - name: "Nginx Proxy Manager"
+        icon: "nginx"
+        description: "反向代理管理面板"
+        tags: ["运维", "网络"]
+        internalUrl: "http://100.64.0.1:81"
+
+      - name: "MySQL"
+        icon: "mysql"
+        description: "关系型数据库"
+        tags: ["数据库"]
+        internalUrl: "http://100.64.0.1:8080"
+
+      - name: "Redis Commander"
+        icon: "redis"
+        description: "Redis 可视化管理"
+        tags: ["数据库", "缓存"]
+        internalUrl: "http://100.64.0.1:8081"
+
+  # ── 服务器 B ──────────────────────────
+  - name: "服务器 B — 开发环境"
+    icon: "💻"
+    services:
+      - name: "GitLab"
+        icon: "gitlab"
+        description: "代码仓库与 CI/CD"
+        tags: ["开发", "Git"]
+        internalUrl: "http://100.64.0.2:8929"
+        externalUrl: "https://gitlab.example.com"
+
+      - name: "Jenkins"
+        icon: "jenkins"
+        description: "持续集成/持续部署"
+        tags: ["开发", "CI/CD"]
+        internalUrl: "http://100.64.0.2:8080"
+        externalUrl: "https://jenkins.example.com"
+
+      - name: "SonarQube"
+        icon: "sonarqube"
+        description: "代码质量检测"
+        tags: ["开发", "质量"]
+        internalUrl: "http://100.64.0.2:9000"
+
+      - name: "MinIO"
+        icon: "minio"
+        description: "对象存储 S3 兼容"
+        tags: ["存储"]
+        internalUrl: "http://100.64.0.2:9001"
+        externalUrl: "https://minio.example.com"
+
+  # ── 通用工具 ──────────────────────────
+  - name: "常用工具"
+    icon: "🧰"
+    services:
+      - name: "Bitwarden"
+        icon: "bitwarden"
+        description: "密码管理器"
+        tags: ["安全", "工具"]
+        internalUrl: "http://100.64.0.1:8282"
+        externalUrl: "https://vault.example.com"
+
+      - name: "Nextcloud"
+        icon: "nextcloud"
+        description: "私有云盘"
+        tags: ["存储", "协作"]
+        internalUrl: "http://100.64.0.2:8888"
+        externalUrl: "https://cloud.example.com"
+
+      - name: "Syncthing"
+        icon: "syncthing"
+        description: "文件同步"
+        tags: ["存储", "同步"]
+        internalUrl: "http://100.64.0.1:8384"

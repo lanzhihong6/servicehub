@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServiceHub - 服务导航</title>
+  <meta name="description" content="自托管服务导航面板，快速访问内网和外网服务">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 背景装饰：改为深色纯净颗粒或极弱高光，移除高饱和渐变球以体现高级感 -->
+  <div class="bg-decoration">
+    <div class="bg-light-spot"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- 侧边栏 -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#grad1)" opacity="0.9"/>
+              <path d="M2 17L12 22L22 17" stroke="url(#grad2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="url(#grad2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="grad1" x1="2" y1="2" x2="22" y2="12">
+                  <stop stop-color="#06b6d4"/>
+                  <stop offset="1" stop-color="#8b5cf6"/>
+                </linearGradient>
+                <linearGradient id="grad2" x1="2" y1="12" x2="22" y2="22">
+                  <stop stop-color="#06b6d4"/>
+                  <stop offset="1" stop-color="#8b5cf6"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h1 class="logo-text">ServiceHub</h1>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-label">服务分组</div>
+        <ul class="group-list" id="groupList">
+          <li class="group-item active" data-group="all">
+            <span class="group-indicator" style="background: linear-gradient(135deg, #06b6d4, #8b5cf6)"></span>
+            <span class="group-name">全部服务</span>
+            <span class="group-count" id="countAll">0</span>
+          </li>
+          <!-- 动态生成分组 -->
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="manage-btn" id="manageBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span>管理配置</span>
+        </button>
+        <div class="sidebar-info">
+          <span class="info-dot"></span>
+          <span id="totalCount">0</span> 个服务
+        </div>
+      </div>
+    </aside>
+
+    <!-- 移动端顶栏与分类导航 (隐藏在桌面端) -->
+    <div class="mobile-nav-container" id="mobileNavContainer">
+      <div class="mobile-header-top">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#grad1)" opacity="0.9"/>
+              <path d="M2 17L12 22L22 17" stroke="url(#grad2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="url(#grad2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h1 class="logo-text">ServiceHub</h1>
+        </div>
+        <!-- 移动端管理配置按钮 -->
+        <button class="mobile-manage-btn" id="mobileManageBtn" aria-label="管理配置">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="mobile-search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="mobileSearchInput" placeholder="搜索服务..." autocomplete="off">
+      </div>
+      <!-- 移动端横向滚动分组 -->
+      <div class="mobile-tabs" id="mobileTabs">
+        <button class="mobile-tab-item active" data-group="all">全部</button>
+        <!-- 动态生成胶囊分类 -->
+      </div>
+    </div>
+
+    <!-- 主内容 -->
+    <main class="main-content">
+      <!-- 顶部栏 -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h2 class="page-title" id="pageTitle">全部服务</h2>
+          <p class="page-subtitle" id="pageSubtitle"></p>
+        </div>
+        <div class="top-bar-right">
+          <div class="search-box" id="searchBox">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="搜索服务..." autocomplete="off">
+            <kbd class="search-shortcut">/</kbd>
+          </div>
+        </div>
+      </header>
+
+      <!-- 服务卡片网格 -->
+      <div class="cards-grid" id="cardsGrid">
+        <!-- 动态生成 -->
+      </div>
+
+      <!-- 空状态 -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <p>没有找到匹配的服务</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- 侧边栏遮罩 -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- 编辑弹窗 -->
+  <div class="modal-overlay" id="editorOverlay">
+    <div class="modal" id="editorModal">
+      <div class="modal-header">
+        <h3 class="modal-title">管理配置</h3>
+        <button class="modal-close" id="editorClose" aria-label="关闭">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body" id="editorBody">
+        <!-- 站点信息 -->
+        <div class="editor-section">
+          <div class="section-title">站点信息</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>标题</label>
+              <input type="text" id="siteTitle" placeholder="ServiceHub">
+            </div>
+            <div class="form-group">
+              <label>副标题</label>
+              <input type="text" id="siteSubtitle" placeholder="我的服务导航">
+            </div>
+          </div>
+        </div>
+
+        <!-- 分组列表 -->
+        <div class="editor-section">
+          <div class="section-header">
+            <div class="section-title">服务分组</div>
+            <button class="btn-add" id="addGroupBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              添加分组
+            </button>
+          </div>
+          <div id="groupsContainer"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel" id="editorCancel">取消</button>
+        <button class="btn-save" id="editorSave">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          保存配置
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/js-yaml.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/editor.js"></script>
+</body>
+</html>

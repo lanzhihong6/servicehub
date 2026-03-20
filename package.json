@@ -1,0 +1,10 @@
+{
+  "name": "servicehub",
+  "version": "1.0.0",
+  "description": "轻量级自托管服务导航面板",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}

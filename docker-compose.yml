@@ -1,0 +1,10 @@
+services:
+  servicehub:
+    build: .
+    container_name: servicehub
+    ports:
+      - "8090:8090"
+    volumes:
+      # 挂载配置文件，通过页面编辑后持久化到宿主机
+      - ./config.yaml:/app/config.yaml
+    restart: unless-stopped
