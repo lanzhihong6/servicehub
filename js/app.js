@@ -229,17 +229,13 @@
           ? `<a class="card-btn card-btn-internal" href="${escAttr(svc.internalUrl)}" target="_blank" rel="noopener noreferrer" title="内网访问: ${escAttr(svc.internalUrl)}">
               <span class="btn-icon">🏠</span> 内网
             </a>`
-          : `<span class="card-btn card-btn-internal card-btn-disabled">
-              <span class="btn-icon">🏠</span> 内网
-            </span>`
+          : ''
         }
         ${hasExternal
           ? `<a class="card-btn card-btn-external" href="${escAttr(svc.externalUrl)}" target="_blank" rel="noopener noreferrer" title="外网访问: ${escAttr(svc.externalUrl)}">
               <span class="btn-icon">🌐</span> 外网
             </a>`
-          : `<span class="card-btn card-btn-external card-btn-disabled">
-              <span class="btn-icon">🌐</span> 外网
-            </span>`
+          : ''
         }
       </div>
     `;
