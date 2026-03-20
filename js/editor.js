@@ -156,7 +156,7 @@
       <div class="service-item-body">
         <div class="form-row">
           <div class="form-group">
-            <label>图标</label>
+            <label>图标 <a href="https://simpleicons.org/" target="_blank" title="在新标签页中打开 SimpleIcons" style="font-size: 0.7rem; color: var(--accent-internal); text-decoration: none; margin-left: 4px; border-bottom: 1px dashed var(--accent-internal);">🔍寻找图标</a></label>
             <input type="text" class="svc-icon" value="${esc(svc.icon || '')}" placeholder="预设名 / emoji / URL">
           </div>
           <div class="form-group">
